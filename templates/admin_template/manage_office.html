@@ -1,0 +1,106 @@
+{% extends 'admin_template/base.html' %}
+
+  {% block content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-9">
+                    <h2>View All Office</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a>Manage Office</a>
+                        </li>
+                        <li class="active">
+                            <strong>View All Office</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-3">
+                <a class="btn btn-primary margin-top-25px btn-outline  navbar-right" href="/add_office">
+                        <i class="fa fa-sign-out"></i> Add new Office
+                    </a>
+                </div>
+           
+
+
+  </div>
+            
+
+ <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>View all the office details list</h5>
+
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Config option 1</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <table class="footable table table-stripped toggle-arrow-tiny">
+                                <thead>
+                                <tr>
+
+                                    <th data-toggle="true">S.N.</th>
+                                    <th data-toggle="true">Company Name</th>
+                                    <th data-hide="all">Email</th>
+                                    <th data-hide="all">Address</th>
+                                    <th data-hide="all">Phone</th>
+                                     <th data-hide="all">Reg</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for office in office %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{ office.name }}</td>
+                                    <td>{{ office.email }}</td>
+                                    <td>{{ office.address }}</td>
+                                    <td>{{ office.phone }}</td>
+                                    <td>{{ office.registrationNo }}</td>
+
+                                    <td  class="text-right">
+                                    <div class="btn-group">
+                                            <a class="btn btn-primary btn-circle" href="/edit_office/{{office.id}}" type="button"><i class="fa fa-edit"></i></a>
+                                           <a class="btn btn-danger btn-circle" href="/delete_office/{{office.id}}" type="button"><i class="fa fa-times"></i></a>
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <ul class="pagination pull-right"></ul>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+        
+  {% endblock content %}
+

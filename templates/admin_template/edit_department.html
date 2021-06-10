@@ -1,0 +1,106 @@
+{% extends 'admin_template/base.html' %}
+
+  {% block content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-9">
+                    <h2>Edit Department ({{ department.name }} | #ID : {{ department.id }})</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a>Manage Department</a>
+                        </li>
+                        <li class="active">
+                            <strong>Edit Department</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-3">
+                 <a class="btn btn-primary margin-top-25px btn-outline  navbar-right" href="/manage_department">
+                        <i class="fa fa-sign-out"></i> View All Department
+                    </a>
+                </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+{% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissable role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                                
+  <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Edit New department Form</small></h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Config option 1</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form action="/add_department" method="POST" class="form-horizontal">
+                            {% csrf_token %}
+                        
+                                                                
+                                <div class="form-group"><label class="col-sm-2 control-label">Department Name</label>
+                                    <div class="col-sm-10"><input type="text" value="{{ department.name }}" name="name" class="form-control"></div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                 <div class="form-group"><label class="col-sm-2 control-label">Department Email</label>
+
+                                    <div class="col-sm-10"><input type="email" value="{{ department.email }}"  name="email" class="form-control"></div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                               
+                                
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-2">
+                                        <button class="btn btn-white" type="submit">Cancel</button>
+                                        <button class="btn btn-primary" type="submit">Save changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            
+  {% endblock content %}
+

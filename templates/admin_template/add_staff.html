@@ -1,0 +1,221 @@
+{% extends 'admin_template/base.html' %}
+{% block content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+   <div class="col-lg-9">
+      <h2>Add Staff</h2>
+      <ol class="breadcrumb">
+         <li>
+            <a href="index.html">Home</a>
+         </li>
+         <li>
+            <a>Manage Staff</a>
+         </li>
+         <li class="active">
+            <strong>Add Staff</strong>
+         </li>
+      </ol>
+   </div>
+   <div class="col-lg-3">
+      <a class="btn btn-primary margin-top-25px btn-outline  navbar-right" href="/manage_staff">
+      <i class="fa fa-sign-out"></i> View All Staff
+      </a>
+   </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+   {% if messages %}
+   <div class="form-group">
+      <div class="col-12">
+         {% for message in messages %}
+         {% if message.tags == "error" %}
+         <div class="alert alert-danger alert-dismissible" role="alert" style="margin-top: 10px;">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         {% elif message.tags == "success" %}
+         <div class="alert alert-success alert-dismissable role="alert" style="margin-top: 10px;">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         {% endif %}
+         {% endfor %}
+      </div>
+   </div>
+   {% endif %}
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="ibox float-e-margins">
+            <div class="ibox-title">
+               <h5>Create New Staff Form</small></h5>
+               <div class="ibox-tools">
+                  <a class="collapse-link">
+                  <i class="fa fa-chevron-up"></i>
+                  </a>
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fa fa-wrench"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                     <li><a href="#">Config option 1</a>
+                     </li>
+                     <li><a href="#">Config option 2</a>
+                     </li>
+                  </ul>
+                  <a class="close-link">
+                  <i class="fa fa-times"></i>
+                  </a>
+               </div>
+            </div>
+            <div class="ibox-content">
+               <form action="/add_staff" method="POST" class="form-horizontal">
+                  {% csrf_token %}
+                  <div class="form-group">
+                     <label class="col-sm-2 control-label">Frist Name</label>
+                     <div class="col-sm-4"><input type="text" name="first_name" class="form-control"></div>
+                     <label class="col-sm-2 control-label">Last Name</label>
+                     <div class="col-sm-4"><input type="text" name="last_name" class="form-control"></div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group">
+                     <label class="col-sm-1 control-label">Address</label>
+                     <div class="col-sm-3"><input type="text" name="address" class="form-control"></div>
+                     <label class="col-sm-1 control-label">Phone</label>
+                     <div class="col-sm-3"><input type="phone" name="phone" class="form-control"></div>
+                     <label class="col-sm-1 control-label">Image</label>
+                     <div class="col-sm-3"><input type="file" name="image" class="form-control"></div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group">
+                     <label class="col-sm-1 control-label">Office</label>
+                     <div class="col-sm-3">
+                        <select name="office" class="form-control">
+                        <option selected disabled >-select-</optoin>
+                         {% for office in office %}
+                           <option value="{{ office.id }}">{{office.name}}</optoin>
+                        {% endfor %}
+                        </select>
+                     </div>
+                     <label class="col-sm-1 control-label">Branch</label>
+                     <div class="col-sm-3">
+                        <select name="branch" class="form-control">
+                           <option selected disabled >-select-</optoin>
+                           {% for branch in branch %}
+                           <option value="{{ branch.id }}">{{branch.branchName}}</optoin>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <label class="col-sm-1 control-label">Department</label>
+                     <div class="col-sm-3">
+                        <select name="department" class="form-control">
+                            <option selected disabled >-select-</optoin>
+                           {% for department in department %}
+                           <option value="{{ department.id }}">{{department.name}}</optoin>
+                           {% endfor %}
+
+                        </select>
+                     </div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group">
+                     <label class="col-sm-1 control-label">Shift </label>
+                     <div class="col-sm-3">
+                        <select name="shift" class="form-control">
+                           <option selected disabled >-select-</optoin>
+                           {% for shift in shift %}
+                           <option value="{{ shift.id }}">{{shift.name}}</optoin>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <label class="col-sm-1 control-label">Designation</label>
+                     <div class="col-sm-3">
+                        <select name="designation" class="form-control">
+                          <option selected disabled >-select-</optoin>
+                           {% for designation in designation %}
+                           <option value="{{ designation.id }}">{{designation.name}}</optoin>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <label class="col-sm-2 control-label">Duty Type</label>
+                     <div class="col-sm-2">
+                        <select name="duty_type" class="form-control">
+                           <option value="Full Time">Full Time</optoin> 
+                           <option value="Part Time">Part Time</optoin>
+                           <option value="Contructual">Contructual</optoin>
+                           <option value="Others">Others</optoin>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group">
+                     <label class="col-sm-1 control-label">Card No</label>
+                     <div class="col-sm-3"><input type="text" name="card_no" class="form-control"></div>
+                     <label class="col-sm-1 control-label">Gender</label>
+                     <div class="col-sm-3">
+                        <select name="gender" class="form-control">
+                           <option value="Male">Male</optoin>
+                           <option value="Female">Female</optoin>
+                           <option value="Others">Others</optoin>
+                        </select>
+                     </div>
+                     <label class="col-sm-1 control-label">Marital</label>
+                     <div class="col-sm-3">
+                        <select name="marital_status" class="form-control">
+                           <option value="Others">Single</optoin>
+                           <option value="Married">Married</optoin>
+                           <option value="Divorced">Divorced</optoin>
+                           <option value="Widowed">Widowed</optoin>
+                           <option value="Others">Others</optoin>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group">
+                     <label class="col-sm-1 control-label">DOB </label>
+                     <div class="col-sm-3"><input type="date" name="date_of_birth" class="form-control"></div>
+                     <label class="col-sm-1 control-label">Sallery</label>
+                     <div class="col-sm-3"><input type="number" name="sallery" class="form-control"></div>
+                     <label class="col-sm-2 control-label">Sallery Type</label>
+                     <div class="col-sm-2">
+                        <select name="sallery_type" class="form-control">
+                           <option value="Monthly">Monthly</optoin>
+                           <option value="Hourly">Hourly</optoin>
+                           <option value="Yearly">Yearly</optoin>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group">
+                     <label class="col-sm-2 control-label">Date Joied </label>
+                     <div class="col-sm-2"><input type="date" name="date_of_join" class="form-control"></div>
+                     <label class="col-sm-2 control-label">Contact Person</label>
+                     <div class="col-sm-2"><input type="number" name="contact_person" class="form-control"></div>
+                     <label class="col-sm-2 control-label">Citizenship No </label>
+                     <div class="col-sm-2"><input type="number" name="citizenship_no" class="form-control"></div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group">
+                     <label class="col-sm-1 control-label">User Name</label>
+                     <div class="col-sm-3"><input type="text" name="username" class="form-control">
+                     </div>
+                     <label class="col-sm-1 control-label">Email</label>
+                     <div class="col-sm-3"><input type="email" name="email" class="form-control"></div>
+                     <label class="col-sm-1 control-label">Password</label>
+                     <div class="col-sm-3"><input type="password" name="password"  name="password" class="form-control">
+                     </div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group">
+                     <div class="col-sm-4 col-sm-offset-2">
+                        <button class="btn btn-white" type="submit">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Save changes</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock content %}
